@@ -1,6 +1,4 @@
-# amazon-securitylake-sagemaker-workshop
-
-## Amazon Security Lake SageMaker Workshop
+## **Amazon Security Lake SageMaker Workshop**
 
 [Amazon Security Lake](https://aws.amazon.com/security-lake/) automatically centralizes security data from AWS environments, SaaS providers, on premises, and cloud sources into a purpose-built data lake stored in your account. With Security Lake, you can get a more complete understanding of your security data across your entire organization. You can also improve the protection of your workloads, applications, and data. Security Lake has adopted the Open Cybersecurity Schema Framework (OCSF), an open standard. With OCSF support, the service normalizes and combines security data from AWS and a broad range of enterprise security data sources.
 
@@ -8,12 +6,19 @@
 
 This AWS workshop consists of several modules that integrate Amazon Security Lake and Amazon SageMaker, and it demonstrates how to analyze security log data at scale using machine learning on AWS.
 
-## Clone Git repo
+## **Pre-Requisites** ##
+
+To deploy the solution, you must first complete the following prerequisites:
+
+1.  Enable Amazon Security Lake within your organization or a single account with both VPC Flow Logs and Route 53 resolver logs enabled.
+2.  Ensure that the AWS Identity and Access Management (IAM) role used by SageMaker processing jobs and notebooks has been granted an IAM policy including the Amazon Security Lake subscriber query access permission for the managed Amazon Security lake database and tables managed by AWS Lake Formation. This processing job should be run from within an analytics or security tooling account to remain compliant with AWS Security Reference Architecture (AWS SRA).
+
+## **Clone Git repo**
 ```
 git clone https://github.com/aws-samples/amazon-securitylake-sagemaker-workshop
 cd amazon-securitylake-sagemaker-workshop
 ```
-## Module 1
+## **Module 1**
 
 Demonstrates how to analyze network security log data stored in Amazon Security Lake using the IP Insights algorithm available in Amazon SageMaker.
 
@@ -101,8 +106,16 @@ Previewing CloudFormation changeset before deployment
 
 ```
 
-## Future Work
+## **Future Work**
 
 * Demonstrate integration with additional data sets from on-premise, partners, and cloud providers.
 * Demonstrate integration with additional algorithms that analyze  network, host, and other security log data.
 * Demonstrate integration with other security monitoring solutions from AWS and partners.
+
+## **Security**
+
+See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+
+## **License**
+
+This library is licensed under the MIT-0 License. See the LICENSE file.
