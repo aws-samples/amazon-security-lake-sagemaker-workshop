@@ -1,0 +1,58 @@
+{
+    "Records": [
+      {
+        "messageId": "881b03ca-97b9-4646-a442-e67af4638cde",
+        "receiptHandle": "AQEBqOhd4t2lXJkqg15ufzvcsHid7yCIl2JMK50uFANElv2VO/6SSG449YVrIaFAKdMBJ+nkbsGUmGNYuCjXIgmQ6iZ7kX/TpQQPqnlfWInUOuUhD0B66+L4t9lokaPedrIeUoB+9DLS+bYJTCTZy6fxfQH9M8B54AK8N6AKwNfK/FxOJPOmb52FeB2Z1E+URU2evAuszwXVwlzH9cgJNkLrI043+v2EiPJH4bjDfvFi2Yr5jQn1qyum1TUEj/l0TjSsvL3NMAHSfKQULc/VhqIkptkFR3dy1b32cK4eibBZCC1uBp4hiZCX8zeVUUU1GXavonGIBQRuCu9IUg/uNv3++OKTCeEuEsYOix6HBBEdskLFLLPwxeriiVCtyYb7l5lgzn8Pr0Yt3/K8DkNEo+UrLp2hmvxI7rrmg9p7To73H1Y=",
+        "body": {
+          "Records": [
+            {
+              "eventVersion": "2.1",
+              "eventSource": "aws:s3",
+              "awsRegion": "us-east-1",
+              "eventTime": "2023-09-22T16:06:46.318Z",
+              "eventName": "ObjectCreated:Put",
+              "userIdentity": {
+                "principalId": "AWS:AROAZF7SFGDIVDHMW3XB5:ETLWorkerLambda"
+              },
+              "requestParameters": {
+                "sourceIPAddress": "10.0.145.2"
+              },
+              "responseElements": {
+                "x-amz-request-id": "JQ611DXMRJ2JXT8A",
+                "x-amz-id-2": "BCG4V9n7P6Izf4jiX2PmBCzjZdLtz53wI9woyOLs086KvvxWH3dy3Qn+JFwT2ljSCivmL9ELni/VXYk28BN0/xqCeMzTJL1k4cv63q0AVO0="
+              },
+              "s3": {
+                "s3SchemaVersion": "1.0",
+                "configurationId": "MzYzNDczMzMtNDk1OS00NWY0LTljMjUtMzgzNmQzNGY4Y2Yx",
+                "bucket": {
+                  "name": "aws-security-data-lake-us-east-1-iiwhzfdilkd1tp1kcbh8mmk4shsvyy",
+                  "ownerIdentity": {
+                    "principalId": "A14ZITM1MGSR02"
+                  },
+                  "arn": "arn:aws:s3:::aws-security-data-lake-us-east-1-iiwhzfdilkd1tp1kcbh8mmk4shsvyy"
+                },
+                "object": {
+                  "key": "aws/VPC_FLOW/1.0/region=us-east-1/accountId=645411899653/eventDay=20230726/02c4c95860435b9afa86fb93f7fa776a.gz.parquet",
+                  "size": "35095",
+                  "eTag": "b68171d372a75300fe69a0cf327f33f3",
+                  "sequencer": "00650DBB963BBF1DDD"
+                }
+              }
+            }
+          ]
+        },
+        "attributes": {
+          "ApproximateReceiveCount": "1",
+          "AWSTraceHeader": "Root=1-650dbb96-340f5f410e5f98b2544a3ca9;Parent=1ae76a1b79e5d7ca;Sampled=0",
+          "SentTimestamp": "1695398807034",
+          "SenderId": "AROA4R74ZO52XAB5OD7T4:S3-PROD-END",
+          "ApproximateFirstReceiveTimestamp": "1695398812034"
+        },
+        "messageAttributes": {},
+        "md5OfBody": "352c058872bd0837d5e135b8b18cf209",
+        "eventSource": "aws:sqs",
+        "eventSourceARN": "arn:aws:sqs:us-east-1: 028667762794:SecurityLake_us-east-1_MAIN_QUEUE_1_0",
+        "awsRegion": "us-east-1"
+      }
+    ]
+  }

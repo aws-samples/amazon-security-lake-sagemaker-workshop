@@ -1,0 +1,12 @@
+version = 0.1
+[default.deploy.parameters]
+stack_name = "sam-securitylake-sagemaker-ipinsights-app"
+resolve_s3 = true
+s3_prefix = "sam-securitylake-sagemaker-ipinsights-app"
+region = "us-east-1"
+profile = "bishrt-secauditlog-user"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+parameter_overrides = "SQSQueueARN=\"arn:aws:sqs:us-east-1:028667762794:SecurityLake_us-east-1_MAIN_QUEUE_1_0\" SageMakerEndpoint=\"ipinsights-2023-09-21-16-40-26-825\""
+image_repositories = []

@@ -1,0 +1,86 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Parameters:
+  SQSQueueARN:
+    Type: String
+    Description: The ARN of the SQS Queue created by Amazon Security Lake
+  SageMakerEndpoint:
+    Type: String
+    Description: The name of the SageMaker endpoint created in the Jupyter Notebook
+Mappings:
+  RegionMap:
+    # NAMER, EMEA, LATAM, APAC ... https://aws-sdk-pandas.readthedocs.io/en/stable/layers.html
+    us-east-1:
+      LambdaPandasPythonLayer: 'arn:aws:lambda:us-east-1:336392948345:layer:AWSSDKPandas-Python310:5'
+    us-east-2:
+      LambdaPandasPythonLayer: 'arn:aws:lambda:us-east-2:336392948345:layer:AWSSDKPandas-Python310:5'
+    us-west-2:
+      LambdaPandasPythonLayer: 'arn:aws:lambda:us-west-2:336392948345:layer:AWSSDKPandas-Python310:5'
+    eu-west-1:
+      LambdaPandasPythonLayer: 'arn:aws:lambda:eu-west-1:336392948345:layer:AWSSDKPandas-Python310:5'
+    eu-central-1:
+      LambdaPandasPythonLayer: 'arn:aws:lambda:eu-central-1:336392948345:layer:AWSSDKPandas-Python310:5'
+    sa-east-1:
+      LambdaPandasPythonLayer: 'arn:aws:lambda:sa-east-1:336392948345:layer:AWSSDKPandas-Python310:5'
+    ap-southeast-1:
+      LambdaPandasPythonLayer: 'arn:aws:lambda:ap-southeast-1:336392948345:layer:AWSSDKPandas-Python310:5'
+    ap-southeast-2: 
+      LambdaPandasPythonLayer: 'arn:aws:lambda:ap-southeast-2:336392948345:layer:AWSSDKPandas-Python310:5'
+
+Resources:
+  SecurityLakeSageMakerIpInsightsFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      CodeUri: ./
+      Description: ''
+      Environment: 
+        Variables:
+          ENDPOINT_NAME : !Ref SageMakerEndpoint
+      MemorySize: 128
+      Timeout: 60
+      Handler: ipcheck.lambda_handler
+      Runtime: python3.10
+      Architectures:
+        - x86_64
+      EventInvokeConfig:
+        MaximumEventAgeInSeconds: 21600
+        MaximumRetryAttempts: 2
+      EphemeralStorage:
+        Size: 512
+      Events:
+        SQS1:
+          Type: SQS
+          Properties:
+            Queue: !Ref SQSQueueARN
+            BatchSize: 10
+      Layers:
+        - !FindInMap [RegionMap, !Ref "AWS::Region", LambdaPandasPythonLayer]
+        # -  'arn:aws:lambda:us-east-1:336392948345:layer:AWSSDKPandas-Python310:5'
+      RuntimeManagementConfig:
+        UpdateRuntimeOn: Auto
+      SnapStart:
+        ApplyOn: None
+      PackageType: Zip
+      Policies:
+        Version: 2012-10-17
+        Statement:
+          - Sid: SecurityLakeSageMakerIpInsightsSid
+            Effect: Allow
+            Action:
+              - 'sagemaker:InvokeEndpoint'
+              - 'logs:CreateLogGroup'
+              - 'logs:CreateLogStream'
+              - 'logs:PutLogEvents'
+              - 'sqs:ReceiveMessage'
+              - 'sqs:DeleteMessage'
+              - 'sqs:GetQueueAttributes'
+              - 'logs:CreateLogGroup'
+              - 'logs:CreateLogStream'
+              - 'logs:PutLogEvents'
+              - 's3:*'
+              - 's3-object-lambda:*'
+            Resource: '*'
+Outputs:
+  SecurityLakeSageMakerIpInsightsFunctionArn:
+    Value: !GetAtt SecurityLakeSageMakerIpInsightsFunction.Arn
